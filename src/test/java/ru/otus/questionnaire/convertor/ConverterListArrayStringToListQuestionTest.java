@@ -2,7 +2,6 @@ package ru.otus.questionnaire.convertor;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import ru.otus.questionnaire.dto.Question;
 
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 @Getter
 public class Question {
-
+    int rightAnswer;
     private String question;
     private List<String> variables;
 
