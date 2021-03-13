@@ -1,11 +1,15 @@
 package ru.otus.questionnaire.convertor;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 import ru.otus.questionnaire.dto.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
+@Component
 public class ConverterListArrayStringToListQuestion implements Converter<List<String[]>, List<Question>> {
 
     @Override
@@ -22,14 +26,15 @@ public class ConverterListArrayStringToListQuestion implements Converter<List<St
 
     private Question parseStringToQuestion(String[] strings) {
         Question question = new Question();
-        if (strings.length  <= 1) {
+        int length = strings.length;
+        if (length <= 1) {
             return null;
         }
         question.setQuestion(strings[0]);
-        for (int i = 1; i < strings.length; i++) {
+        for (int i = 1; i < length - 1; i++) {
             question.addVariables(strings[i]);
         }
-
+        question.setRightAnswer(parseInt(strings[length - 1].replace("=", "")));
         return question;
     }
 }

@@ -1,12 +1,19 @@
 package ru.otus.questionnaire;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.otus.questionnaire.service.QuestionnaireService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import ru.otus.questionnaire.service.exam.Examination;
+import ru.otus.questionnaire.service.question.QuestionnaireService;
 
+@Configuration
+@PropertySource("classpath:application.properties")
+@ComponentScan
 public class QuestionnaireApp {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
-        QuestionnaireService questionnaireService = context.getBean(QuestionnaireService.class);
-        questionnaireService.startExamination();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(QuestionnaireApp.class);
+        Examination examination = context.getBean(Examination.class);
+        examination.startExamination();
     }
 }
